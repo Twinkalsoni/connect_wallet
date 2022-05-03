@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Button, Container, Heading } from '@chakra-ui/react';
+import {useMoralis} from 'react-moralis';
+import Main from './Main'
 function App() {
+  const {authenticate,isAuthenticated,logout} = useMoralis();
+  if(isAuthenticated){
+   return(
+      <Container>
+        <br/>
+      <Heading> Welcome User! </Heading>
+      <br/>
+      <Button onClick={()=>logout()}>Logout</Button>
+    </Container>
+   );}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <br/>
+    <Heading >
+    Connect Wallet
+    </Heading>
+    <br/>
+    <Button onClick={()=>authenticate()}>Authenticate</Button>
+<Main/>
+    </Container>
   );
 }
 
